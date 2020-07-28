@@ -25,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void increment(View view) {
         quantity++;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     public void decrement(View view) {
         quantity--;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
 
@@ -43,29 +43,33 @@ public class MainActivity extends AppCompatActivity {
     /* This method is called when the order button is clicked.
             */
     public void submitOrder(View view) {
-        int price = quantity * 5;
-        String priceMassage = "Total $ " + price;
-        priceMassage = priceMassage +  "\n Thank you!";
+        int price = calculatePrice(quantity);
+        String priceMassage = createOrderSummery(price);
         displayMassage(priceMassage);
     }
 
-    public void displayMassage (String message){
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+    public String createOrderSummery(int prise){
+        return "Name: Kaptain Kunal" + "\nQuantity: 3" + "\nTotal: $" + prise + "\nThank you!";
+
     }
 
-
+    /**
+     * Calculates the price of the order.
+     *
+     * @param quantity is the number of cups of coffee ordered
+     */
+    private int calculatePrice(int quantity) {
+        int price = quantity * 5;
+        return price;
+    }
+    public void displayMassage (String message){
+        TextView orderSummeryTextView = (TextView) findViewById(R.id.order_summery_text_view);
+        orderSummeryTextView.setText(message);
+    }
     /* This method displays the given quantity value on the screen.
             */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
-    /* This method displays the given price on the screen.
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
-
 }
