@@ -10,8 +10,10 @@ package com.example.android.justjava;
 
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
         int price = calculatePrice(quantity);
         String priceMassage = createOrderSummery(price);
         displayMassage(priceMassage);
+        CheckBox cream = findViewById(R.id.checkBoxCream);
+        if(cream.isChecked())
+            displayCream("true");
+        else displayCream("false");
+        CheckBox chocolate = findViewById(R.id.checkBoxChocolate);
+        if(chocolate.isChecked())
+            displayChocolate("true");
+        else displayChocolate("false");
+
+
     }
 
     public String createOrderSummery(int prise){
@@ -72,4 +84,15 @@ public class MainActivity extends AppCompatActivity {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
+
+    private void displayCream(String s) {
+        TextView textCteam = (TextView) findViewById(R.id.cream_text_view);
+        textCteam.setText("Add whipped cream? " + s);
+    }
+
+    private void displayChocolate(String s) {
+        TextView textCteam = (TextView) findViewById(R.id.chocolate_text_view);
+        textCteam.setText("Add chocolate? " + s);
+    }
+
 }
